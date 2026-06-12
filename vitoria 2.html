@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel & Vitória 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sakura-pink: #FFB7C5;
+            --sakura-dark: #C9485B;
+            --gold: #D4AF37;
+            --cream: #FFF8F0;
+            --dark: #2D2D2D;
+            --soft-pink: #FFF0F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .japanese-font {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        /* Sakura petals animation */
+        .sakura-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            top: -10%;
+            background: var(--sakura-pink);
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Lanternas orientais subindo */
+        .lantern-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 998;
+            overflow: hidden;
+        }
+
+        .lantern {
+            position: absolute;
+            bottom: -15%;
+            opacity: 0;
+            animation: rise linear infinite;
+        }
+
+        .lantern-body {
+            width: 18px;
+            height: 26px;
+            background: radial-gradient(ellipse at center, #FFD700 0%, #FF8C00 60%, #C9485B 100%);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            box-shadow: 0 0 10px rgba(255, 200, 0, 0.3);
+        }
+
+        .lantern-body::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 4px;
+            background: #8B4513;
+            border-radius: 2px;
+        }
+
+        .lantern-body::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: #C9485B;
+            border-radius: 0 0 50% 50%;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.25; }
+            50% { transform: translateY(-50vh) translateX(var(--sway, 20px)); opacity: 0.2; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-120vh) translateX(var(--sway2, -15px)); opacity: 0; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--cream) 50%, #FFF5EE 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF8F0' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%23FFE8EC' stop-opacity='0.2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23sky)' width='1200' height='800'/%3E%3C!-- Monte Fuji --%3E%3Cpath d='M450 800 L600 320 L750 800 Z' fill='%23D4C5E2' opacity='0.15'/%3E%3Cpath d='M480 800 L600 380 L720 800 Z' fill='%23C8B8D8' opacity='0.1'/%3E%3Cpath d='M550 380 L600 320 L650 380 Z' fill='%23FFFFFF' opacity='0.2'/%3E%3C!-- Nuvens aquarela --%3E%3Cellipse cx='300' cy='350' rx='120' ry='30' fill='%23FFB7C5' opacity='0.08'/%3E%3Cellipse cx='800' cy='300' rx='150' ry='35' fill='%23FFB7C5' opacity='0.06'/%3E%3Cellipse cx='550' cy='280' rx='80' ry='20' fill='%23E8C5D0' opacity='0.08'/%3E%3C!-- Cerejeira esquerda --%3E%3Cpath d='M80 800 L85 580 Q90 550 80 520 Q75 500 82 480' stroke='%23A0522D' stroke-width='3' fill='none' opacity='0.12'/%3E%3Cpath d='M82 520 Q60 500 50 480' stroke='%23A0522D' stroke-width='2' fill='none' opacity='0.1'/%3E%3Cpath d='M82 550 Q110 530 130 510' stroke='%23A0522D' stroke-width='2' fill='none' opacity='0.1'/%3E%3Ccircle cx='50' cy='470' r='25' fill='%23FFB7C5' opacity='0.12'/%3E%3Ccircle cx='75' cy='460' r='20' fill='%23FFC8D6' opacity='0.1'/%3E%3Ccircle cx='130' cy='500' r='22' fill='%23FFB7C5' opacity='0.1'/%3E%3Ccircle cx='82' cy='470' r='18' fill='%23FFD0DC' opacity='0.12'/%3E%3C!-- Cerejeira direita --%3E%3Cpath d='M1100 800 L1095 600 Q1090 570 1100 540 Q1105 520 1098 500' stroke='%23A0522D' stroke-width='3' fill='none' opacity='0.12'/%3E%3Cpath d='M1098 540 Q1120 520 1140 500' stroke='%23A0522D' stroke-width='2' fill='none' opacity='0.1'/%3E%3Cpath d='M1098 570 Q1070 550 1050 530' stroke='%23A0522D' stroke-width='2' fill='none' opacity='0.1'/%3E%3Ccircle cx='1140' cy='490' r='25' fill='%23FFB7C5' opacity='0.12'/%3E%3Ccircle cx='1115' cy='480' r='20' fill='%23FFC8D6' opacity='0.1'/%3E%3Ccircle cx='1050' cy='520' r='22' fill='%23FFB7C5' opacity='0.1'/%3E%3Ccircle cx='1098' cy='490' r='18' fill='%23FFD0DC' opacity='0.12'/%3E%3C!-- Pagode distante --%3E%3Cpath d='M900 720 L900 680 L880 680 L920 660 L920 640 L900 640 L940 620 L940 600 L930 600 L950 580 L970 600 L960 600 L960 620 L1000 640 L980 640 L980 660 L1020 680 L1000 680 L1000 720 Z' fill='%23A0522D' opacity='0.06'/%3E%3C!-- Bambu esquerda --%3E%3Cline x1='180' y1='800' x2='180' y2='450' stroke='%234A7C59' stroke-width='2' opacity='0.08'/%3E%3Cline x1='200' y1='800' x2='200' y2='500' stroke='%234A7C59' stroke-width='1.5' opacity='0.06'/%3E%3Cellipse cx='180' cy='460' rx='15' ry='8' fill='%234A7C59' opacity='0.06'/%3E%3Cellipse cx='180' cy='500' rx='12' ry='6' fill='%234A7C59' opacity='0.05'/%3E%3Cellipse cx='200' cy='510' rx='12' ry='6' fill='%234A7C59' opacity='0.05'/%3E%3C!-- Montanhas distantes --%3E%3Cpath d='M0 700 Q100 620 200 680 Q350 600 500 660 Q600 620 700 660 Q850 600 1000 650 Q1100 620 1200 680 L1200 800 L0 800 Z' fill='%23B8C5D0' opacity='0.06'/%3E%3C!-- Lago/reflexo --%3E%3Cellipse cx='600' cy='750' rx='300' ry='40' fill='%23B8D4E3' opacity='0.05'/%3E%3C!-- Gruas voando --%3E%3Cpath d='M350 200 Q355 195 360 200 Q365 195 370 200' stroke='%23666' stroke-width='1' fill='none' opacity='0.08'/%3E%3Cpath d='M380 220 Q385 215 390 220 Q395 215 400 220' stroke='%23666' stroke-width='1' fill='none' opacity='0.06'/%3E%3Cpath d='M320 230 Q325 225 330 230 Q335 225 340 230' stroke='%23666' stroke-width='1' fill='none' opacity='0.06'/%3E%3C/svg%3E") no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .kanji-love {
+            font-size: 5rem;
+            color: var(--sakura-dark);
+            opacity: 0.15;
+            position: absolute;
+            top: 10%;
+            right: 10%;
+        }
+
+        .kanji-poem {
+            font-size: 1.8rem;
+            color: var(--sakura-dark);
+            opacity: 0.15;
+            position: absolute;
+            top: 8%;
+            left: 4%;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            line-height: 2.8;
+            max-height: 80vh;
+            font-family: 'Noto Serif JP', serif;
+            columns: 4;
+            column-gap: 0.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: var(--sakura-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .hero .date-badge {
+            display: inline-block;
+            background: var(--sakura-dark);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 1.5rem;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+            color: var(--sakura-dark);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Timeline Section */
+        .section {
+            padding: 4rem 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            color: var(--sakura-dark);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: grid;
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(201, 72, 91, 0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        .photo-card:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .photo-card:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photo-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .photo-card .caption {
+            padding: 0.5rem;
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            border-top: 2px solid var(--sakura-pink);
+            font-size: 0.75rem;
+        }
+
+        .photo-placeholder {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--soft-pink), var(--sakura-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sakura-dark);
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        /* Declarations */
+        .declaration {
+            background: white;
+            border-left: 4px solid var(--sakura-pink);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .declaration::before {
+            content: '❝';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 3rem;
+            color: var(--sakura-pink);
+            opacity: 0.5;
+        }
+
+        .declaration p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--sakura-pink);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '🌸';
+            position: absolute;
+            left: -2.7rem;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+        .timeline-item .date {
+            font-weight: 600;
+            color: var(--sakura-dark);
+            font-size: 0.9rem;
+        }
+
+        .timeline-item .event {
+            margin-top: 0.3rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Proposal Section */
+        .proposal {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--soft-pink) 50%, #FFE4E8 100%);
+            position: relative;
+        }
+
+        .proposal .ring-emoji {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .proposal h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--sakura-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .proposal .message {
+            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .proposal .signature {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            color: var(--sakura-dark);
+            margin-top: 2rem;
+        }
+
+        .proposal .japanese-text {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2rem;
+            color: var(--sakura-dark);
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--sakura-dark);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .footer .hearts {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 150px);
+                justify-content: center;
+            }
+            .love-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* O que amo em você */
+        .love-list {
+            display: grid;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .love-item {
+            background: white;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(201,72,91,0.08);
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.6;
+            border-bottom: 3px solid var(--sakura-pink);
+        }
+
+        .love-item span {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Countdown */
+        .countdown-section {
+            padding: 3rem 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #FFF5EE, var(--soft-pink));
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .countdown-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 3px 15px rgba(201,72,91,0.1);
+            min-width: 80px;
+        }
+
+        .countdown-item .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--sakura-dark);
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .countdown-item .label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Plans section */
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .plan-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-card .title {
+            font-weight: 600;
+            color: var(--sakura-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Proposal stars */
+        .proposal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(2px 2px at 20% 30%, rgba(201,72,91,0.3) 0%, transparent 100%),
+                        radial-gradient(2px 2px at 80% 20%, rgba(212,175,55,0.3) 0%, transparent 100%),
+                        radial-gradient(1px 1px at 40% 70%, rgba(201,72,91,0.2) 0%, transparent 100%),
+                        radial-gradient(1px 1px at 70% 80%, rgba(212,175,55,0.2) 0%, transparent 100%),
+                        radial-gradient(2px 2px at 10% 60%, rgba(201,72,91,0.2) 0%, transparent 100%),
+                        radial-gradient(1px 1px at 90% 50%, rgba(212,175,55,0.3) 0%, transparent 100%),
+                        radial-gradient(1px 1px at 50% 10%, rgba(201,72,91,0.2) 0%, transparent 100%),
+                        radial-gradient(2px 2px at 60% 90%, rgba(212,175,55,0.2) 0%, transparent 100%);
+            animation: twinkle 4s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Yes buttons */
+        .proposal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-yes {
+            background: var(--sakura-dark);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201,72,91,0.3);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(201,72,91,0.4);
+        }
+
+        .btn-yes.gold {
+            background: var(--gold);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+            display: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -10px;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* PS section */
+        .ps-section {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: var(--cream);
+        }
+
+        .ps-section p {
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.8;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sakura Petals -->
+    <div class="sakura-container" id="sakura"></div>
+    <div class="lantern-container" id="lanterns"></div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="kanji-love japanese-font">愛</span>
+        <div class="hero-content">
+            <p style="max-width:600px; font-family:'Noto Serif JP', serif; font-size:clamp(0.9rem, 2.5vw, 1.15rem); line-height:2; color:#555; margin-bottom:2rem; font-style:italic;">
+                "Pelos céus, agora que nos encontramos, nunca seremos separados. Só quando as montanhas se desgastarem e os rios secarem, o trovão trovejar no inverno e a neve cair no verão, quando o céu e a terra se unirem, só assim seremos separados."
+            </p>
+            <h1>Gabriel & Vitória</h1>
+            <p class="subtitle">二人の物語 — Nossa história juntos</p>
+            <span class="date-badge">30 de Janeiro • 永遠に</span>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Nossa História -->
+    <section class="section">
+        <h2 class="section-title">私たちの歴史<br><small style="font-size:0.6em;color:#888;">Nossa história</small></h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="date">Final de 2025</span>
+                <p class="event">Dois mundos se cruzaram pela internet. Bastou uma conversa para não querer parar mais. Desde o primeiro "oi", a gente não largou o celular — era mensagem de manhã, de tarde, de madrugada. O tempo parava quando a gente conversava. 💬</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">O Bloqueio 🚫</span>
+                <p class="event">Gabriel disse que ia viajar com os amigos e... Vitória bloqueou. Ciúmes? Orgulho? Talvez os dois. Mas ele não desistiu. Mandou mensagem, insistiu, tentou de tudo. Silêncio. Até que no Ano Novo, uma foto apareceu nos stories. Ela viu. E o coração falou mais alto que o orgulho. 💕</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">Janeiro de 2026</span>
+                <p class="event">Depois do desbloqueio, as conversas voltaram com tudo — mais intensas, mais profundas. Cada dia era uma descoberta nova. A cada mensagem, a certeza crescia: isso aqui é diferente. ✨</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">O Beijo explosivo 💥</span>
+                <p class="event">Choveu. E no meio da chuva, aconteceu o nosso beijo. A Vitória nunca esqueceu — ela diz que foi a nossa versão do Beijo Explosivo, igualzinho nos doramas. A chuva caindo, o coração acelerado, e aquele momento perfeito que parecia roteiro. Mas era real. Era nosso. 💋</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">A Família 👨‍👩‍👧‍👦</span>
+                <p class="event">Antes mesmo do pedido oficial, o irmão da Vitória já tinha decidido: "Vocês já estão namorando!" — e saiu contando pra família inteira. Os Nakamura já conheciam o Gabriel antes mesmo dele se apresentar formalmente. O destino tinha pressa. 😂</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">A Madrugada 🚪</span>
+                <p class="event">Uma vez ela ficou brava. Muito brava. Gabriel fez o que qualquer apaixonado faria: apareceu na porta dela de madrugada. Ela não queria atender. Ele disse que nunca mais voltaria se ela não recebesse. Silêncio. Até que a porta abriu. Porque no fundo, nenhum dos dois consegue ficar longe do outro. 💕</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">30 de Janeiro de 2026 💍</span>
+                <p class="event">Com a bênção (antecipada) da família e o coração transbordando, Gabriel pediu Vitória em namoro. Dia 30 — o número que se tornou sagrado. O começo oficial de uma história que já tinha começado muito antes. 🌸</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">Dia 30 — Todo mês 📅</span>
+                <p class="event">Cada dia 30 é celebrado como se fosse o primeiro. Um lembrete mensal de que esse amor cresce como as sakuras na primavera — sempre florindo, sempre mais bonito. 🌸</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1 de Novembro de 2026 🥂</span>
+                <p class="event">A festa de noivado. Família, amigos, e a celebração oficial de que Oliveira e Nakamura vão se tornar um só. 🎉</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">4 de Dezembro de 2027 👰🤵</span>
+                <p class="event">O grande dia. Oliveira e Nakamura se tornam um só. O casamento que vai unir dois mundos, duas histórias, dois corações que se encontraram numa tela e decidiram nunca mais se separar. 💒</p>
+            </div>
+            <div class="timeline-item" style="opacity:0.7;">
+                <span class="date">O resto da vida ✨</span>
+                <p class="event" style="font-style:italic;">Ainda por escrever... juntos. 🖊️</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Declarações -->
+    <section class="section">
+        <h2 class="section-title">言葉<br><small style="font-size:0.6em;color:#888;">Palavras do coração</small></h2>
+
+        <div class="declaration">
+            <p>Vitória, você é a minha primavera eterna. Como as cerejeiras que florescem a cada ano, nosso amor renasce mais bonito a cada dia 30.</p>
+        </div>
+
+        <div class="declaration">
+            <p>Contigo aprendi que o amor não é só sentimento — é escolha. E eu te escolho todos os dias, em todas as vidas, 永遠に (para sempre).</p>
+        </div>
+
+        <div class="declaration">
+            <p>De Oliveira a Nakamura, de Janeiro a Dezembro, de namorados a noivos... cada passo ao seu lado é o caminho que eu escolhi pra vida inteira.</p>
+        </div>
+    </section>
+
+    <!-- O que eu amo em você -->
+    <section class="section">
+        <h2 class="section-title">好きなところ<br><small style="font-size:0.6em;color:#888;">O que eu amo em você</small></h2>
+
+        <div class="love-list">
+            <div class="love-item"><span>📺</span>Maratonar doramas juntos, abraçados, e te ver chorar nas cenas românticas</div>
+            <div class="love-item"><span>🎌</span>Que você está gostando de assistir anime comigo</div>
+            <div class="love-item"><span>😊</span>Esse sorriso que ilumina tudo e me faz esquecer qualquer dia ruim</div>
+            <div class="love-item"><span>💗</span>O jeito que você se preocupa comigo</div>
+            <div class="love-item"><span>👨‍👩‍👧‍👦</span>Sua família que me abraçou como se eu já fosse parte dela</div>
+            <div class="love-item"><span>🌙</span>As madrugadas inteiras conversando, sem ver o tempo passar, sem querer desligar</div>
+            <div class="love-item"><span>🚪</span>Que mesmo brava, quando eu apareci na sua porta de madrugada, você foi me receber</div>
+            <div class="love-item"><span>😍</span>Quando você sorri pra mim</div>
+        </div>
+    </section>
+
+    <!-- Nossos planos -->
+    <section class="section">
+        <h2 class="section-title">未来<br><small style="font-size:0.6em;color:#888;">Nossos planos</small></h2>
+
+        <div class="plans">
+            <div class="plan-card"><div class="icon">🏠</div><div class="title">Morar juntos</div></div>
+            <div class="plan-card"><div class="icon">👶</div><div class="title">Ter filhos</div></div>
+            <div class="plan-card"><div class="icon">🌍</div><div class="title">Viajar o mundo todo</div></div>
+            <div class="plan-card"><div class="icon">☀️</div><div class="title">Acordar juntos todos os dias</div></div>
+            <div class="plan-card"><div class="icon">💒</div><div class="title">Casar</div></div>
+            <div class="plan-card"><div class="icon">👴👵</div><div class="title">Envelhecer juntos</div></div>
+        </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="countdown-section">
+        <h2 class="section-title">カウントダウン<br><small style="font-size:0.6em;color:#888;">Contagem regressiva pro casamento</small></h2>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item"><div class="number" id="days">---</div><div class="label">Dias</div></div>
+            <div class="countdown-item"><div class="number" id="hours">--</div><div class="label">Horas</div></div>
+            <div class="countdown-item"><div class="number" id="minutes">--</div><div class="label">Min</div></div>
+            <div class="countdown-item"><div class="number" id="seconds">--</div><div class="label">Seg</div></div>
+        </div>
+    </section>
+
+    <!-- Pedido de Casamento -->
+    <section class="proposal">
+        <p class="message">
+            Desde o dia 30 de janeiro, eu soube que você era a pessoa com quem eu queria construir uma vida.
+            Cada momento ao seu lado confirmou isso. Cada risada, cada abraço, cada dia 30 celebrado juntos.
+            <br><br>
+            Agora, neste dia 12 de junho, eu te peço: vem comigo pra sempre?
+            Vem ser minha esposa, minha parceira, minha sakura eterna?
+            <br><br>
+            Eu quero acordar do seu lado todos os dias. Eu quero que o mundo inteiro saiba:
+            <strong>eu sou seu, e você é minha.</strong>
+        </p>
+        <div class="ring-emoji">💍</div>
+        <h2>Vitória Nakamura,<br>quer se casar comigo?</h2>
+        <p class="japanese-text">結婚してください</p>
+        <p style="color:#888;font-size:0.85rem;margin-top:0.3rem;">(Case-se comigo)</p>
+        <p class="signature">Com todo meu amor,<br>Gabriel Oliveira 🤍</p>
+        <div class="proposal-buttons">
+            <button class="btn-yes" onclick="explodeConfetti()">Sim! 💍</button>
+            <button class="btn-yes gold" onclick="explodeConfetti()">Sim, mil vezes sim! 🌸</button>
+        </div>
+    </section>
+
+    <!-- Confetti -->
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="hearts">🌸 💕 🌸</div>
+        <p>Gabriel & Vitória — 30/01 → ∞</p>
+        <p style="margin-top:0.3rem;opacity:0.7;font-family:'Noto Serif JP',serif;">二人でずっと一緒に</p>
+        <p style="margin-top:0.8rem;opacity:0.5;font-family:'Noto Serif JP',serif;font-size:0.75rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.8;">天よ、今出会った以上、二度と離れることはない。山が崩れ、川が枯れ、冬に雷が鳴り、夏に雪が降り、天と地が一つになる時、その時だけ離れよう。</p>
+    </div>
+
+    <!-- Music Player (YouTube hidden) -->
+    <iframe id="yt-player" width="0" height="0" src="https://www.youtube.com/embed/jzMOfYIbGFo?autoplay=1&loop=1&playlist=jzMOfYIbGFo&enablejsapi=1" frameborder="0" allow="autoplay" style="position:absolute;top:-9999px;left:-9999px;"></iframe>
+
+    <div id="music-player" style="position:fixed;bottom:1rem;right:1rem;z-index:9999;background:white;border-radius:50px;padding:0.6rem 1.2rem;box-shadow:0 4px 15px rgba(201,72,91,0.2);display:flex;align-items:center;gap:0.6rem;cursor:pointer;transition:all 0.3s ease;" onclick="toggleMusic()">
+        <span id="music-icon" style="font-size:1.3rem;">🎵</span>
+        <span id="music-text" style="font-size:0.8rem;color:var(--sakura-dark);font-weight:500;">Tocar música</span>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Create sakura petals
+        function createPetals() {
+            const container = document.getElementById('sakura');
+            const petalCount = 15;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.width = (Math.random() * 10 + 8) + 'px';
+                petal.style.height = (Math.random() * 10 + 8) + 'px';
+                petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                petal.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(petal);
+            }
+        }
+
+        createPetals();
+        createLanterns();
+
+        // Lanternas orientais (só nas laterais)
+        function createLanterns() {
+            const container = document.getElementById('lanterns');
+            for (let i = 0; i < 4; i++) {
+                const lantern = document.createElement('div');
+                lantern.classList.add('lantern');
+                // Só laterais: 0-15% ou 85-100%
+                const side = Math.random() > 0.5;
+                lantern.style.left = side ? (Math.random() * 12 + 2) + '%' : (Math.random() * 12 + 86) + '%';
+                lantern.style.animationDuration = (Math.random() * 15 + 22) + 's';
+                lantern.style.animationDelay = (Math.random() * 25) + 's';
+                lantern.style.setProperty('--sway', (Math.random() * 20 - 10) + 'px');
+                lantern.style.setProperty('--sway2', (Math.random() * 20 - 10) + 'px');
+                lantern.innerHTML = '<div class="lantern-body"></div>';
+                container.appendChild(lantern);
+            }
+        }
+
+        // Music player (YouTube embed)
+        let isPlaying = false;
+        let ytPlayer;
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('yt-player', {
+                events: {
+                    'onReady': function(event) {
+                        event.target.playVideo();
+                        isPlaying = true;
+                        document.getElementById('music-icon').textContent = '⏸️';
+                        document.getElementById('music-text').textContent = 'Pausar';
+                    }
+                }
+            });
+        }
+
+        function toggleMusic() {
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-text');
+
+            if (isPlaying) {
+                if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+                icon.textContent = '🎵';
+                text.textContent = 'Tocar música';
+                isPlaying = false;
+            } else {
+                if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+                icon.textContent = '⏸️';
+                text.textContent = 'Pausar';
+                isPlaying = true;
+            }
+        }
+
+        // Load YouTube API
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+
+        // Fade in elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.photo-card, .declaration, .timeline-item, .love-item, .plan-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Countdown pro casamento (4 de dezembro 2027)
+        function updateCountdown() {
+            const wedding = new Date('2027-12-04T18:00:00');
+            const now = new Date();
+            const diff = wedding - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Confetti explosion
+        function explodeConfetti() {
+            const container = document.getElementById('confetti');
+            container.style.display = 'block';
+            const colors = ['#FFB7C5', '#C9485B', '#D4AF37', '#FFF0F5', '#FF69B4'];
+            const emojis = ['🌸', '💕', '💍', '✨', '🎊'];
+
+            for (let i = 0; i < 80; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.animationDelay = Math.random() * 1 + 's';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+                if (Math.random() > 0.5) {
+                    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    piece.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                } else {
+                    piece.style.width = (Math.random() * 8 + 4) + 'px';
+                    piece.style.height = (Math.random() * 8 + 4) + 'px';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.borderRadius = '50%';
+                }
+
+                container.appendChild(piece);
+
+                piece.addEventListener('animationend', function() {
+                    piece.remove();
+                    if (container.children.length === 0) {
+                        container.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
